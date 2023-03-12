@@ -17,13 +17,16 @@ export type SkillDamageAbnormalMoveEvent = {
 export function read(reader: Read) {
   const data = {} as SkillDamageAbnormalMoveEvent;
   data.SkillMoveOptionData = SkillMoveOptionData.read(reader);
-  data.Unk4_m = reader.u16();
+  data.Unk4_m = reader.u16();  
   data.Destination = Vector3F.read(reader);
   data.Unk8_m = reader.u16();
   data.Unk3_m = reader.u16();
   data.Unk1_m = reader.u8();
   data.Unk2_m = reader.u64();
   data.Position = Vector3F.read(reader);
+  data.Unk2_m = reader.u64();
   data.skillDamageEvent = SkillDamageEvent.read(reader);
+  data.Unk3_m = reader.u16();
+  data.Unk8_m = reader.u16();
   return data;
 }

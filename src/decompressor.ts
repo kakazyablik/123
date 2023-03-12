@@ -8,11 +8,12 @@ export class Decompressor {
 
   constructor(oodle_state: Buffer, xorTable: Buffer) {
     this.oodle = new oodle.Oodle(oodle_state);
-    if (xorTable.length != 256) throw new Error("Invalid xorTable length");
+    if (xorTable.length != 4176) throw new Error("Invalid xorTable length");
     this.xorTable = xorTable;
   }
 
   decrypt(data: Buffer, xorShift: number, compression: number, xor: boolean) {
+    if(xorShift == -1) throw new Error("unsupported packet");
     if (xor) this.xor(data, xorShift);
     let out: Buffer;
     switch (compression) {
@@ -46,6 +47,12 @@ export class Decompressor {
   }
 
   xor(data: Buffer, seed: number) {
-    for (let i = 0; i < data.length; i++) data[i] ^= this.xorTable[seed++ % 256]!;
+    for (let i = 0; i < data.length; i++) { 
+      data[i] ^= this.xorTable[seed]!;
+      seed += 1024;
+      if(seed >= this.xorTable.length) {
+        seed = (seed % this.xorTable.length) + 84;
+      }
+    }
   }
 }

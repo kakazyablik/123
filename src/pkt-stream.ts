@@ -21,7 +21,7 @@ export class PKTStream extends TypedEmitter<PKTStreamEvents> {
       if (xor > 2) return false;
       const compression = buf.readUInt8(4);
       if (compression > 3) return false;
-      const data = buf.subarray(6);
+      const data = buf.subarray(10);
       const opcode = buf.readUInt16LE(2);
 
       const pkt = mapping.get(opcode);
@@ -69,12 +69,19 @@ export class PKT<T> {
   get parsed() {
     if (!this.#cached) {
       try {
-        this.#cached = this.#read(this.#decompressor.decrypt(this.#data, this.#opcode, this.#compression, this.#xor));
+        this.#cached = this.#read(this.#decompressor.decrypt(this.#data, this.getXorShift(this.#opcode), this.#compression, this.#xor));
       } catch (e) {
         console.error(`[meter-core/pkt-stream] - ${e}`);
         return undefined;
       }
     }
     return this.#cached;
+  }
+
+  getXorShift(opcode: number) : number  {
+    if(opcode == 0x803) return 2132; // damage
+    if(opcode == 0x1DF0) return 3648; // proj
+    if(opcode == 0xBC1E) return 1136; // abnormal move
+    return -1;
   }
 }

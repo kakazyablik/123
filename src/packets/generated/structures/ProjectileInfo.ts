@@ -1,52 +1,40 @@
 // Auto Generated, do not edit.
 import type { Read } from "../../stream";
 import * as TripodLevel from "../../common/TripodLevel";
-import * as TripodIndex from "../../common/TripodIndex";
-export type ProjectileInfo = {
-  Unk0: number;
-  Unk1: number;
-  Unk2: bigint;
-  struct_316?: Buffer;
-  tripodLevel: TripodLevel.TripodLevel;
-  Unk5: number;
-  Unk6: number;
-  Unk7_0?: bigint;
-  Unk8: number;
-  tripodIndex: TripodIndex.TripodIndex;
+export type ProjectileInfo = {  
   OwnerId: bigint;
-  SkillId: number;
-  Unk12: bigint;
-  Unk13_0?: number;
   ProjectileId: bigint;
-  Unk15: number;
-  Unk16: number;
-  Unk17: bigint;
-  Unk18: number;
   SkillEffect: number;
+  SkillId: number;
+  tripodIndex: TripodIndex.TripodIndex;
+  tripodLevel: TripodLevel.TripodLevel; 
   SkillLevel: number;
 };
 export function read(reader: Read) {
   const data = {} as ProjectileInfo;
-  data.Unk0 = reader.u32();
-  data.Unk1 = reader.u32();
-  data.Unk2 = reader.u64();
-  if (reader.bool()) data.struct_316 = reader.bytes(reader.u16(), 11, 9);
-  data.tripodLevel = TripodLevel.read(reader);
-  data.Unk5 = reader.u8();
-  data.Unk6 = reader.u32();
-  if (reader.bool()) data.Unk7_0 = reader.u64();
-  data.Unk8 = reader.u8();
+  reader.u64();
+  reader.bool();
+  reader.u64();
+  reader.u32();
+  reader.u32();
+  if(reader.bool()) reader.u64();
   data.tripodIndex = TripodIndex.read(reader);
-  data.OwnerId = reader.u64();
-  data.SkillId = reader.u32();
-  data.Unk12 = reader.u64();
-  if (reader.bool()) data.Unk13_0 = reader.u32();
+  reader.u16();
+  reader.u32();
+  if(reader.bool()) {
+    let num = reader.u16()
+    for(var i = 0; i < num; i++) reader.bool();
+  }
   data.ProjectileId = reader.u64();
-  data.Unk15 = reader.u32();
-  data.Unk16 = reader.u16();
-  data.Unk17 = reader.u64();
-  data.Unk18 = reader.u16();
+  data.SkillId = reader.u32();
+  reader.u16();
+  reader.u32();
+  data.tripodLevel = TripodLevel.read(reader);
+  reader.bool();
   data.SkillEffect = reader.u32();
+  data.OwnerId = reader.u64();
   data.SkillLevel = reader.u8();
+  if(reader.bool()) reader.u32();
+  reader.u64();
   return data;
 }
