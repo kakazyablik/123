@@ -1,6 +1,7 @@
 // Auto Generated, do not edit.
 import type { Read } from "../../stream";
 import * as TripodLevel from "../../common/TripodLevel";
+import * as TripodIndex from "../../common/TripodIndex";
 export type ProjectileInfo = {  
   OwnerId: bigint;
   ProjectileId: bigint;

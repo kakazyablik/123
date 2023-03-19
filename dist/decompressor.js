@@ -37,11 +37,13 @@ var Decompressor = class {
   xorTable;
   constructor(oodle_state, xorTable) {
     this.oodle = new import_oodle.default.Oodle(oodle_state);
-    if (xorTable.length != 256)
+    if (xorTable.length != 4176)
       throw new Error("Invalid xorTable length");
     this.xorTable = xorTable;
   }
   decrypt(data, xorShift, compression, xor) {
+    if (xorShift == -1)
+      throw new Error("unsupported packet");
     if (xor)
       this.xor(data, xorShift);
     let out;
@@ -72,8 +74,13 @@ var Decompressor = class {
     return out.subarray(16);
   }
   xor(data, seed) {
-    for (let i = 0; i < data.length; i++)
-      data[i] ^= this.xorTable[seed++ % 256];
+    for (let i = 0; i < data.length; i++) {
+      data[i] ^= this.xorTable[seed];
+      seed += 1024;
+      if (seed >= this.xorTable.length) {
+        seed = seed % this.xorTable.length + 84;
+      }
+    }
   }
 };
 // Annotate the CommonJS export names for ESM import in node:

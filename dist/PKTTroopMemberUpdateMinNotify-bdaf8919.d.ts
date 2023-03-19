@@ -408,26 +408,12 @@ type TripodIndex = {
 };
 
 type ProjectileInfo = {
-    Unk0: number;
-    Unk1: number;
-    Unk2: bigint;
-    struct_316?: Buffer;
-    tripodLevel: TripodLevel;
-    Unk5: number;
-    Unk6: number;
-    Unk7_0?: bigint;
-    Unk8: number;
-    tripodIndex: TripodIndex;
     OwnerId: bigint;
-    SkillId: number;
-    Unk12: bigint;
-    Unk13_0?: number;
     ProjectileId: bigint;
-    Unk15: number;
-    Unk16: number;
-    Unk17: bigint;
-    Unk18: number;
     SkillEffect: number;
+    SkillId: number;
+    tripodIndex: TripodIndex;
+    tripodLevel: TripodLevel;
     SkillLevel: number;
 };
 
@@ -436,7 +422,7 @@ type PKTNewProjectile = {
 };
 declare function read$p(buf: Buffer): PKTNewProjectile;
 declare const name$p = "PKTNewProjectile";
-declare const opcode$p = 21277;
+declare const opcode$p = 7664;
 
 type PKTParalyzationStateNotify = {
     ObjectId: bigint;
@@ -648,7 +634,7 @@ type PKTSkillDamageNotify = {
 };
 declare function read$a(buf: Buffer): PKTSkillDamageNotify;
 declare const name$a = "PKTSkillDamageNotify";
-declare const opcode$a = 17502;
+declare const opcode$a = 2051;
 
 type PKTSkillStageNotify = {
     SourceId: bigint;

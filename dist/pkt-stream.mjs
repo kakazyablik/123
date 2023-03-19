@@ -1,10 +1,10 @@
 import {
   mapping
-} from "./chunk-476BDOPM.mjs";
+} from "./chunk-ZN7Y55B6.mjs";
 import "./chunk-D7LHKVM4.mjs";
 import "./chunk-Q54OOCTY.mjs";
 import "./chunk-NEZ5FR2C.mjs";
-import "./chunk-RIBNCGPI.mjs";
+import "./chunk-OOD5NDCI.mjs";
 import "./chunk-NHABU752.mjs";
 
 // src/pkt-stream.ts
@@ -25,7 +25,7 @@ var PKTStream = class extends TypedEmitter {
       const compression = buf.readUInt8(4);
       if (compression > 3)
         return false;
-      const data = buf.subarray(6);
+      const data = buf.subarray(10);
       const opcode = buf.readUInt16LE(2);
       const pkt = mapping.get(opcode);
       if (pkt) {
@@ -60,13 +60,22 @@ var PKT = class {
   get parsed() {
     if (!this.#cached) {
       try {
-        this.#cached = this.#read(this.#decompressor.decrypt(this.#data, this.#opcode, this.#compression, this.#xor));
+        this.#cached = this.#read(this.#decompressor.decrypt(this.#data, this.getXorShift(this.#opcode), this.#compression, this.#xor));
       } catch (e) {
         console.error(`[meter-core/pkt-stream] - ${e}`);
         return void 0;
       }
     }
     return this.#cached;
+  }
+  getXorShift(opcode) {
+    if (opcode == 2051)
+      return 2132;
+    if (opcode == 7664)
+      return 3648;
+    if (opcode == 48158)
+      return 1136;
+    return -1;
   }
 };
 export {

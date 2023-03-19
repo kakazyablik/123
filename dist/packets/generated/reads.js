@@ -769,30 +769,33 @@ function read30(reader) {
 // src/packets/generated/structures/ProjectileInfo.ts
 function read31(reader) {
   const data = {};
-  data.Unk0 = reader.u32();
-  data.Unk1 = reader.u32();
-  data.Unk2 = reader.u64();
+  reader.u64();
+  reader.bool();
+  reader.u64();
+  reader.u32();
+  reader.u32();
   if (reader.bool())
-    data.struct_316 = reader.bytes(reader.u16(), 11, 9);
-  data.tripodLevel = read29(reader);
-  data.Unk5 = reader.u8();
-  data.Unk6 = reader.u32();
-  if (reader.bool())
-    data.Unk7_0 = reader.u64();
-  data.Unk8 = reader.u8();
+    reader.u64();
   data.tripodIndex = read30(reader);
-  data.OwnerId = reader.u64();
-  data.SkillId = reader.u32();
-  data.Unk12 = reader.u64();
-  if (reader.bool())
-    data.Unk13_0 = reader.u32();
+  reader.u16();
+  reader.u32();
+  if (reader.bool()) {
+    let num = reader.u16();
+    for (var i = 0; i < num; i++)
+      reader.bool();
+  }
   data.ProjectileId = reader.u64();
-  data.Unk15 = reader.u32();
-  data.Unk16 = reader.u16();
-  data.Unk17 = reader.u64();
-  data.Unk18 = reader.u16();
+  data.SkillId = reader.u32();
+  reader.u16();
+  reader.u32();
+  data.tripodLevel = read29(reader);
+  reader.bool();
   data.SkillEffect = reader.u32();
+  data.OwnerId = reader.u64();
   data.SkillLevel = reader.u8();
+  if (reader.bool())
+    reader.u32();
+  reader.u64();
   return data;
 }
 
@@ -1015,15 +1018,15 @@ function read48(reader) {
 // src/packets/generated/structures/SkillDamageEvent.ts
 function read49(reader) {
   const data = {};
-  if (reader.bool())
-    data.DamageAttr = reader.u8();
-  data.MaxHp = read14(reader);
-  data.Damage = read14(reader);
-  data.Unk3_m = reader.i16();
-  data.Modifier = reader.u8();
-  data.TargetId = reader.u64();
   data.CurHp = read14(reader);
   data.DamageType = reader.u8();
+  data.MaxHp = read14(reader);
+  data.Unk3_m = reader.i16();
+  if (reader.bool())
+    data.DamageAttr = reader.u8();
+  data.Damage = read14(reader);
+  data.Modifier = reader.u8();
+  data.TargetId = reader.u64();
   return data;
 }
 
@@ -1038,7 +1041,10 @@ function read50(reader) {
   data.Unk1_m = reader.u8();
   data.Unk2_m = reader.u64();
   data.Position = read22(reader);
+  data.Unk2_m = reader.u64();
   data.skillDamageEvent = read49(reader);
+  data.Unk3_m = reader.u16();
+  data.Unk8_m = reader.u16();
   return data;
 }
 
@@ -1059,11 +1065,11 @@ function read51(buf) {
 function read52(buf) {
   const reader = new Read(buf);
   const data = {};
-  data.SourceId = reader.u64();
-  data.SkillDamageEvents = reader.array(reader.u16(), () => read49(reader), 50);
-  data.SkillEffectId = reader.u32();
   data.SkillId = reader.u32();
   data.SkillLevel = reader.u8();
+  data.SkillEffectId = reader.u32();
+  data.SourceId = reader.u64();
+  data.SkillDamageEvents = reader.array(reader.u16(), () => read49(reader), 50);
   return data;
 }
 
