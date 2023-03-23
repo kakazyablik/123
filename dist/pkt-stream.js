@@ -265,7 +265,7 @@ function read24(buf) {
   return data;
 }
 var name2 = "PKTSkillDamageAbnormalMoveNotify";
-var opcode2 = 48158;
+var opcode2 = 45692;
 
 // src/packets/generated/definitions/PKTSkillDamageNotify.ts
 function read25(buf) {

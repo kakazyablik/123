@@ -148,7 +148,7 @@ var opcode27 = 54224;
 var opcode28 = 47607;
 
 // src/packets/generated/definitions/PKTSkillDamageAbnormalMoveNotify.ts
-var opcode29 = 48158;
+var opcode29 = 45692;
 
 // src/packets/generated/definitions/PKTSkillDamageNotify.ts
 var opcode30 = 30050;

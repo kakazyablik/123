@@ -623,7 +623,7 @@ type PKTSkillDamageAbnormalMoveNotify = {
 };
 declare function read$b(buf: Buffer): PKTSkillDamageAbnormalMoveNotify;
 declare const name$b = "PKTSkillDamageAbnormalMoveNotify";
-declare const opcode$b = 48158;
+declare const opcode$b = 45692;
 
 type PKTSkillDamageNotify = {
     SourceId: bigint;
