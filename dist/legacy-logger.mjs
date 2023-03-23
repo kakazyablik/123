@@ -351,8 +351,6 @@ var LegacyLogger = class extends TypedEmitter {
         skillEffectId: parsed.projectileInfo.SkillEffect,
         skillId: parsed.projectileInfo.SkillId
       };
-      console.log("proj");
-      console.log(projectile);
       this.#currentEncounter.entities.set(projectile.entityId, projectile);
     }).on("PKTParalyzationStateNotify", (pkt) => {
     }).on("PKTPartyInfo", (pkt) => {
@@ -549,8 +547,6 @@ var LegacyLogger = class extends TypedEmitter {
             }
           }
           skillEffect2 = skillEffect2 ?? this.#data.getSkillEffectComment(skillEffectId);
-          console.log("dmg");
-          console.log(parsedDmg);
           this.#buildLine(
             8 /* Damage */,
             sourceEntity.entityId,
