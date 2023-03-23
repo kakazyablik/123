@@ -79,9 +79,9 @@ export class PKT<T> {
   }
 
   getXorShift(opcode: number) : number  {
-    if(opcode == 0x803) return 2132; // damage
-    if(opcode == 0x1DF0) return 3648; // proj
-    if(opcode == 0xBC1E) return 1136; // abnormal move
+    if(opcode == 0x7562) return 1460; // damage
+    if(opcode == 0x52FA) return 1868; // proj
+    if(opcode == 0xB27C) return 3788; // abnormal move
     return -1;
   }
 }

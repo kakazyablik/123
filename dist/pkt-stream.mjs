@@ -1,10 +1,10 @@
 import {
   mapping
-} from "./chunk-ZN7Y55B6.mjs";
+} from "./chunk-6ECXRYOT.mjs";
 import "./chunk-D7LHKVM4.mjs";
 import "./chunk-Q54OOCTY.mjs";
 import "./chunk-NEZ5FR2C.mjs";
-import "./chunk-OOD5NDCI.mjs";
+import "./chunk-NSCYRXWN.mjs";
 import "./chunk-NHABU752.mjs";
 
 // src/pkt-stream.ts
@@ -69,12 +69,12 @@ var PKT = class {
     return this.#cached;
   }
   getXorShift(opcode) {
-    if (opcode == 2051)
-      return 2132;
-    if (opcode == 7664)
-      return 3648;
-    if (opcode == 48158)
-      return 1136;
+    if (opcode == 30050)
+      return 1460;
+    if (opcode == 21242)
+      return 1868;
+    if (opcode == 45692)
+      return 3788;
     return -1;
   }
 };

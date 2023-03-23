@@ -13,29 +13,32 @@ export type ProjectileInfo = {
 };
 export function read(reader: Read) {
   const data = {} as ProjectileInfo;
+
+  reader.bool();
+  if(reader.bool()) reader.u32();
+  data.ProjectileId = reader.u64();
+  reader.u16();
+  reader.u32();
+  data.SkillId = reader.u32();
   reader.u64();
   reader.bool();
-  reader.u64();
-  reader.u32();
-  reader.u32();
-  if(reader.bool()) reader.u64();
+  data.OwnerId = reader.u64();
   data.tripodIndex = TripodIndex.read(reader);
-  reader.u16();
+  reader.u64();
   reader.u32();
   if(reader.bool()) {
     let num = reader.u16()
     for(var i = 0; i < num; i++) reader.bool();
   }
-  data.ProjectileId = reader.u64();
-  data.SkillId = reader.u32();
-  reader.u16();
-  reader.u32();
   data.tripodLevel = TripodLevel.read(reader);
-  reader.bool();
-  data.SkillEffect = reader.u32();
-  data.OwnerId = reader.u64();
+  reader.u32();
+  if(reader.bool()) reader.u64();
+  reader.u32();
+  reader.u8()
+  reader.u16();
   data.SkillLevel = reader.u8();
-  if(reader.bool()) reader.u32();
+  data.SkillEffect = reader.u32();
   reader.u64();
+
   return data;
 }

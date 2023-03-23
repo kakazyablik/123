@@ -422,7 +422,7 @@ type PKTNewProjectile = {
 };
 declare function read$p(buf: Buffer): PKTNewProjectile;
 declare const name$p = "PKTNewProjectile";
-declare const opcode$p = 7664;
+declare const opcode$p = 21242;
 
 type PKTParalyzationStateNotify = {
     ObjectId: bigint;
@@ -614,16 +614,16 @@ type SkillDamageAbnormalMoveEvent = {
 };
 
 type PKTSkillDamageAbnormalMoveNotify = {
-    SkillEffectId: number;
-    Unk2_m: number;
-    SkillId: number;
-    Unk1_m: number;
-    SkillDamageAbnormalMoveEvents: SkillDamageAbnormalMoveEvent[];
     SourceId: bigint;
+    SkillEffectId: number;
+    SkillId: number;
+    SkillDamageAbnormalMoveEvents: SkillDamageAbnormalMoveEvent[];
+    Unk1_m: number;
+    Unk2_m: number;
 };
 declare function read$b(buf: Buffer): PKTSkillDamageAbnormalMoveNotify;
 declare const name$b = "PKTSkillDamageAbnormalMoveNotify";
-declare const opcode$b = 43771;
+declare const opcode$b = 48158;
 
 type PKTSkillDamageNotify = {
     SourceId: bigint;
@@ -634,7 +634,7 @@ type PKTSkillDamageNotify = {
 };
 declare function read$a(buf: Buffer): PKTSkillDamageNotify;
 declare const name$a = "PKTSkillDamageNotify";
-declare const opcode$a = 2051;
+declare const opcode$a = 30050;
 
 type PKTSkillStageNotify = {
     SourceId: bigint;
