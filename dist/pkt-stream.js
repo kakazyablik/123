@@ -160,7 +160,6 @@ function read16(reader) {
 // src/packets/generated/structures/ProjectileInfo.ts
 function read17(reader) {
   const data = {};
-  reader.bool();
   if (reader.bool())
     reader.u32();
   data.ProjectileId = reader.u64();
@@ -187,7 +186,6 @@ function read17(reader) {
   reader.u16();
   data.SkillLevel = reader.u8();
   data.SkillEffect = reader.u32();
-  reader.u64();
   return data;
 }
 

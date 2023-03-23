@@ -40,7 +40,7 @@ import {
   opcode7,
   opcode8,
   opcode9
-} from "../../chunk-4CHSB372.mjs";
+} from "../../chunk-YIO5CIZQ.mjs";
 import "../../chunk-NHABU752.mjs";
 export {
   opcode as PKTAbilityChangeNotify,

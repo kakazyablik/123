@@ -13,8 +13,6 @@ export type ProjectileInfo = {
 };
 export function read(reader: Read) {
   const data = {} as ProjectileInfo;
-
-  reader.bool();
   if(reader.bool()) reader.u32();
   data.ProjectileId = reader.u64();
   reader.u16();
@@ -38,7 +36,5 @@ export function read(reader: Read) {
   reader.u16();
   data.SkillLevel = reader.u8();
   data.SkillEffect = reader.u32();
-  reader.u64();
-
   return data;
 }
