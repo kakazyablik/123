@@ -149,6 +149,8 @@ var LegacyLogger = class extends TypedEmitter {
     this.#wasWipe = false;
     this.#wasKill = false;
     this.#localPlayer = {
+      entityId: 0n,
+      entityType: EntityType.Player,
       name: "You",
       class: 0,
       gearLevel: 0,
@@ -206,6 +208,7 @@ var LegacyLogger = class extends TypedEmitter {
         gearLevel: this.#localPlayer.gearLevel,
         characterId: this.#localPlayer.characterId
       };
+      this.#localPlayer = player;
       this.#currentEncounter.entities.set(player.entityId, player);
       PCIdMapper.getInstance().clear();
       StatusTracker.getInstance().Clear();
@@ -219,12 +222,6 @@ var LegacyLogger = class extends TypedEmitter {
       const parsed = pkt.parsed;
       if (!parsed)
         return;
-      this.#localPlayer = {
-        name: parsed.Name,
-        class: parsed.ClassId,
-        gearLevel: this.#u32tof32(parsed.GearLevel),
-        characterId: parsed.CharacterId
-      };
       this.#currentEncounter = new Encounter();
       const player = {
         entityId: parsed.PlayerId,
@@ -234,6 +231,7 @@ var LegacyLogger = class extends TypedEmitter {
         gearLevel: this.#u32tof32(parsed.GearLevel),
         characterId: parsed.CharacterId
       };
+      this.#localPlayer = player;
       this.#currentEncounter.entities.set(player.entityId, player);
       PCIdMapper.getInstance().addMapping(player.characterId, player.entityId);
       PartyTracker.getInstance().completeEntry(player.characterId, parsed.PlayerId);

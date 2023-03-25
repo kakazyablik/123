@@ -94,12 +94,7 @@ export class LegacyLogger extends TypedEmitter<LegacyLoggerEvents> {
   #wasWipe: boolean;
   #wasKill: boolean;
 
-  #localPlayer: {
-    name: string;
-    class: number;
-    gearLevel: number;
-    characterId: bigint;
-  };
+  #localPlayer: Player;
 
   constructor(stream: PKTStream, data: MeterData, settings: LegacyLoggerSettings = {}) {
     super();
@@ -115,6 +110,8 @@ export class LegacyLogger extends TypedEmitter<LegacyLoggerEvents> {
     this.#wasKill = false;
 
     this.#localPlayer = {
+      entityId: 0n,
+      entityType: EntityType.Player,
       name: "You",
       class: 0,
       gearLevel: 0,
@@ -172,6 +169,7 @@ export class LegacyLogger extends TypedEmitter<LegacyLoggerEvents> {
           gearLevel: this.#localPlayer.gearLevel,
           characterId: this.#localPlayer.characterId,
         };
+        this.#localPlayer = player;
         this.#currentEncounter.entities.set(player.entityId, player);
         PCIdMapper.getInstance().clear();
         StatusTracker.getInstance().Clear();
@@ -184,12 +182,6 @@ export class LegacyLogger extends TypedEmitter<LegacyLoggerEvents> {
       .on("PKTInitPC", (pkt) => {
         const parsed = pkt.parsed;
         if (!parsed) return;
-        this.#localPlayer = {
-          name: parsed.Name,
-          class: parsed.ClassId,
-          gearLevel: this.#u32tof32(parsed.GearLevel),
-          characterId: parsed.CharacterId,
-        };
         this.#currentEncounter = new Encounter();
         const player: Player = {
           entityId: parsed.PlayerId,
@@ -199,6 +191,7 @@ export class LegacyLogger extends TypedEmitter<LegacyLoggerEvents> {
           gearLevel: this.#u32tof32(parsed.GearLevel),
           characterId: parsed.CharacterId,
         };
+        this.#localPlayer = player;
         // console.log("PKTInitPC", this.#localPlayer);
         this.#currentEncounter.entities.set(player.entityId, player);
         PCIdMapper.getInstance().addMapping(player.characterId, player.entityId);
