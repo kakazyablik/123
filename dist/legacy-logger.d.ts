@@ -3,7 +3,7 @@ import { MeterData } from './data.js';
 import { PKTStream } from './pkt-stream.js';
 import './decompressor.js';
 import 'oodle';
-import './PKTTroopMemberUpdateMinNotify-0546efc8.js';
+import './PKTTroopMemberUpdateMinNotify-55a86078.js';
 
 declare const enum LineId {
     InitEnv = 1,

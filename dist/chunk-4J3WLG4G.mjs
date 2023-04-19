@@ -8,7 +8,7 @@ import {
   read15 as read,
   read29 as read2,
   read30 as read3
-} from "./chunk-YIO5CIZQ.mjs";
+} from "./chunk-6AOKUIU6.mjs";
 
 // src/packets/generated/mapping.ts
 var mapping = /* @__PURE__ */ new Map([

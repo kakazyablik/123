@@ -160,32 +160,33 @@ function read16(reader) {
 // src/packets/generated/structures/ProjectileInfo.ts
 function read17(reader) {
   const data = {};
-  if (reader.bool())
-    reader.u32();
-  data.ProjectileId = reader.u64();
+  reader.u64();
   reader.u16();
-  reader.u32();
-  data.SkillId = reader.u32();
-  reader.u64();
-  reader.bool();
+  reader.u16();
+  data.ProjectileId = reader.u64();
   data.OwnerId = reader.u64();
-  data.tripodIndex = read16(reader);
-  reader.u64();
   reader.u32();
   if (reader.bool()) {
     let num = reader.u16();
     for (var i = 0; i < num; i++)
       reader.bool();
   }
+  data.SkillId = reader.u32();
   data.tripodLevel = read15(reader);
+  data.tripodIndex = read16(reader);
+  reader.u32();
+  data.SkillLevel = reader.u8();
+  reader.u64();
+  reader.bool();
+  if (reader.bool())
+    reader.u32();
+  reader.u8();
+  reader.u32();
+  data.SkillEffect = reader.u32();
+  reader.u64();
   reader.u32();
   if (reader.bool())
     reader.u64();
-  reader.u32();
-  reader.u8();
-  reader.u16();
-  data.SkillLevel = reader.u8();
-  data.SkillEffect = reader.u32();
   return data;
 }
 
@@ -197,7 +198,7 @@ function read18(buf) {
   return data;
 }
 var name = "PKTNewProjectile";
-var opcode = 21242;
+var opcode = 29017;
 
 // src/packets/common/SkillMoveOptionData.ts
 function read21(reader) {
@@ -225,27 +226,27 @@ function read22(reader) {
   const data = {};
   if (reader.bool())
     data.DamageAttr = reader.u8();
-  data.TargetId = reader.u64();
-  data.Unk3_m = reader.i16();
-  data.Damage = read4(reader);
+  data.MaxHp = read4(reader);
   data.DamageType = reader.u8();
+  data.TargetId = reader.u64();
   data.CurHp = read4(reader);
   data.Modifier = reader.u8();
-  data.MaxHp = read4(reader);
+  data.Damage = read4(reader);
+  data.Unk3_m = reader.i16();
   return data;
 }
 
 // src/packets/generated/structures/SkillDamageAbnormalMoveEvent.ts
 function read23(reader) {
   const data = {};
-  data.Unk2_m = reader.u64();
   data.SkillMoveOptionData = read21(reader);
-  data.Unk8_m = reader.u16();
+  data.Unk1_m = reader.u8();
   data.skillDamageEvent = read22(reader);
   data.Unk2_m = reader.u64();
-  data.Unk3_m = reader.u16();
+  data.Unk8_m = reader.u16();
+  data.Unk2_m = reader.u64();
   data.Destination = read9(reader);
-  data.Unk1_m = reader.u8();
+  data.Unk3_m = reader.u16();
   data.Unk4_m = reader.u16();
   return data;
 }
@@ -254,30 +255,30 @@ function read23(reader) {
 function read24(buf) {
   const reader = new Read(buf);
   const data = {};
-  data.SourceId = reader.u64();
-  data.SkillEffectId = reader.u32();
   data.SkillId = reader.u32();
-  data.Unk1_m = reader.u8();
-  data.SkillDamageAbnormalMoveEvents = reader.array(reader.u16(), () => read23(reader), 50);
   data.Unk2_m = reader.u32();
+  data.SkillEffectId = reader.u32();
+  data.SkillDamageAbnormalMoveEvents = reader.array(reader.u16(), () => read23(reader), 50);
+  data.Unk1_m = reader.u8();
+  data.SourceId = reader.u64();
   return data;
 }
 var name2 = "PKTSkillDamageAbnormalMoveNotify";
-var opcode2 = 45692;
+var opcode2 = 12269;
 
 // src/packets/generated/definitions/PKTSkillDamageNotify.ts
 function read25(buf) {
   const reader = new Read(buf);
   const data = {};
-  data.SourceId = reader.u64();
-  data.SkillId = reader.u32();
-  data.SkillLevel = reader.u8();
   data.SkillEffectId = reader.u32();
   data.SkillDamageEvents = reader.array(reader.u16(), () => read22(reader), 50);
+  data.SourceId = reader.u64();
+  data.SkillLevel = reader.u8();
+  data.SkillId = reader.u32();
   return data;
 }
 var name3 = "PKTSkillDamageNotify";
-var opcode3 = 30050;
+var opcode3 = 25025;
 
 // src/packets/generated/mapping.ts
 var mapping = /* @__PURE__ */ new Map([
@@ -350,12 +351,12 @@ var PKT = class {
     return this.#cached;
   }
   getXorShift(opcode41) {
-    if (opcode41 == 30050)
-      return 1460;
-    if (opcode41 == 21242)
-      return 1868;
-    if (opcode41 == 45692)
-      return 3788;
+    if (opcode41 == 25025)
+      return 532;
+    if (opcode41 == 29017)
+      return 428;
+    if (opcode41 == 12269)
+      return 1088;
     return -1;
   }
 };

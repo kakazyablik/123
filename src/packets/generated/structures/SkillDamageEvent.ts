@@ -14,12 +14,12 @@ export type SkillDamageEvent = {
 export function read(reader: Read) {
   const data = {} as SkillDamageEvent;
   if (reader.bool()) data.DamageAttr = reader.u8();
-  data.TargetId = reader.u64();
-  data.Unk3_m = reader.i16();
-  data.Damage = ReadNBytesInt64.read(reader);
+  data.MaxHp = ReadNBytesInt64.read(reader);
   data.DamageType = reader.u8();
+  data.TargetId = reader.u64();
   data.CurHp = ReadNBytesInt64.read(reader);
   data.Modifier = reader.u8();
-  data.MaxHp = ReadNBytesInt64.read(reader);
+  data.Damage = ReadNBytesInt64.read(reader);
+  data.Unk3_m = reader.i16();
   return data;
 }

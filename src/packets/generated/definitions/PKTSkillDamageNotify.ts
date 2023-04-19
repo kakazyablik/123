@@ -11,13 +11,12 @@ export type PKTSkillDamageNotify = {
 export function read(buf: Buffer) {
   const reader = new Read(buf);
   const data = {} as PKTSkillDamageNotify;
-  data.SourceId = reader.u64();
-  data.SkillId = reader.u32();
-  data.SkillLevel = reader.u8();
   data.SkillEffectId = reader.u32();
   data.SkillDamageEvents = reader.array(reader.u16(), () => SkillDamageEvent.read(reader), 50);
-
+  data.SourceId = reader.u64();
+  data.SkillLevel = reader.u8();
+  data.SkillId = reader.u32();
   return data;
 }
 export const name = "PKTSkillDamageNotify";
-export const opcode = 0x7562;
+export const opcode = 0x61C1;

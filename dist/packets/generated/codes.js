@@ -106,7 +106,7 @@ var opcode13 = 20589;
 var opcode14 = 42606;
 
 // src/packets/generated/definitions/PKTNewProjectile.ts
-var opcode15 = 21242;
+var opcode15 = 29017;
 
 // src/packets/generated/definitions/PKTParalyzationStateNotify.ts
 var opcode16 = 39081;
@@ -148,10 +148,10 @@ var opcode27 = 54224;
 var opcode28 = 47607;
 
 // src/packets/generated/definitions/PKTSkillDamageAbnormalMoveNotify.ts
-var opcode29 = 45692;
+var opcode29 = 12269;
 
 // src/packets/generated/definitions/PKTSkillDamageNotify.ts
-var opcode30 = 30050;
+var opcode30 = 25025;
 
 // src/packets/generated/definitions/PKTSkillStageNotify.ts
 var opcode31 = 29272;
